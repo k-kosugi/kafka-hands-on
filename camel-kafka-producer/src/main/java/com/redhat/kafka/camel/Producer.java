@@ -18,6 +18,12 @@ public class Producer extends RouteBuilder {
                 .setBody(simple("message" + "${header.counter}"))
                 .process(exchange -> {
                     LOG.info("--------------------------------------------------");
+                    var headers = exchange.getMessage().getHeaders();
+                    var iterator = headers.entrySet().iterator();
+                    while (iterator.hasNext()) {
+                        var entry = iterator.next();
+                        LOG.info(entry.getKey() + " : " + entry.getValue());
+                    }
                     LOG.info(exchange.getIn().getBody(String.class));
                 })
                 .to("kafka:myTopic");
