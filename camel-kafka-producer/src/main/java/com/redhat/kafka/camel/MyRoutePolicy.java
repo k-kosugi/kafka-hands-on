@@ -14,7 +14,7 @@ public class MyRoutePolicy implements RoutePolicy {
     public void onExchangeBegin(Route route, Exchange exchange) {
         // Camel Route の中で message# の # 部分をインクリメントするため
         int value = counter.incrementAndGet();
-        exchange.getIn().setHeader("counter", value);
+        exchange.setProperty("counter", value);
     }
 
     @Override

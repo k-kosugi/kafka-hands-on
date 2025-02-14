@@ -9,25 +9,39 @@ import org.jboss.logging.Logger;
 @ApplicationScoped
 public class MyConfiguration {
 
-    private static final Logger LOGGER = Logger.getLogger(MyConfiguration.class);
+    private static final Logger LOG = Logger.getLogger(MyConfiguration.class);
 
     @Named("kafka")
     public KafkaComponent getKafkaComponent() {
-        LOGGER.info("==============================================");
+        LOG.info("======================KafkaComponent========================");
 
-        // kafka component
         var kafkaConfiguration = new KafkaConfiguration();
 
-        // リトライ回数
+        // ブローカーの設定
         kafkaConfiguration.setBrokers("localhost:9092");
+
+        // リトライ回数
         kafkaConfiguration.setRetries(5);
+
+        // 自動コミット
         kafkaConfiguration.setAutoCommitEnable(true);
-        kafkaConfiguration.setBatching(false);
+
+        // バッチサイズ
+        kafkaConfiguration.setProducerBatchSize(8);
+
+        // ClientId
         kafkaConfiguration.setClientId(Producer.class.getSimpleName());
+
+        // Keyシリアライザー
+        kafkaConfiguration.setKeySerializer("org.apache.kafka.common.serialization.StringSerializer");
+
+        // Value シリアライザー
+        kafkaConfiguration.setValueSerializer("org.apache.kafka.common.serialization.StringSerializer");
 
         KafkaComponent kafkaComponent = new KafkaComponent();
         kafkaComponent.setConfiguration(kafkaConfiguration);
 
+        LOG.info("======================KafkaComponent========================");
         return kafkaComponent;
     }
 }

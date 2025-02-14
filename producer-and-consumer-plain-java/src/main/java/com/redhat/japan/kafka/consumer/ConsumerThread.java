@@ -29,6 +29,8 @@ public class ConsumerThread implements Runnable {
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, consumerGroupName);
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "group1");
+        properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         // Consumer の生成
         this.kafkaConsumer = new KafkaConsumer<>(properties);

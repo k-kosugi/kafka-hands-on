@@ -87,8 +87,7 @@ public class Producer {
          *
          */
         properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "16");
-        properties.setProperty(ProducerConfig.RETRIES_CONFIG, "3");
-        properties.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5");
+        properties.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "1");
 
         return properties;
     }

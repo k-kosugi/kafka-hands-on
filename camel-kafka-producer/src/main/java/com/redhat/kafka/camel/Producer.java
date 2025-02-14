@@ -13,13 +13,13 @@ public class Producer extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("timer:myTimer?period=1000&repeatCount=7")
+        from("timer:myTimer?period=1000&repeatCount=8")
                 .routePolicy(new MyRoutePolicy())   // header に格納される counter をインクリメントするためのポリシー
                 .setBody(simple("message" + "${header.counter}"))
                 .process(exchange -> {
                     LOG.info("--------------------------------------------------");
-                    var headers = exchange.getMessage().getHeaders();
-                    var iterator = headers.entrySet().iterator();
+                    var maps = exchange.getProperties();
+                    var iterator = maps.entrySet().iterator();
                     while (iterator.hasNext()) {
                         var entry = iterator.next();
                         LOG.info(entry.getKey() + " : " + entry.getValue());

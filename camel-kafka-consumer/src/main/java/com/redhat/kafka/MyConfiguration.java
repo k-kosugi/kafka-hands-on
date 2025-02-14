@@ -22,8 +22,19 @@ public class MyConfiguration {
         kafkaConfiguration.setBrokers("localhost:9092");
         kafkaConfiguration.setRetries(5);
         kafkaConfiguration.setAutoCommitEnable(true);
+        kafkaConfiguration.setAllowManualCommit(false);
         kafkaConfiguration.setBatching(false);
-        kafkaConfiguration.setConsumersCount(2);
+        kafkaConfiguration.setMaxPollRecords(1);
+
+        // Consumer のスレッド数
+        kafkaConfiguration.setConsumersCount(4);
+
+        // 先頭から読み出す
+        kafkaConfiguration.setAutoOffsetReset("earliest");
+        kafkaConfiguration.setGroupId("group1");
+
+        kafkaConfiguration.setKeyDeserializer("org.apache.kafka.common.serialization.StringDeserializer");
+        kafkaConfiguration.setValueDeserializer("org.apache.kafka.common.serialization.StringDeserializer");
 
         KafkaComponent kafkaComponent = new KafkaComponent();
         kafkaComponent.setConfiguration(kafkaConfiguration);
