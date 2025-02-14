@@ -15,7 +15,7 @@ public class Producer extends RouteBuilder {
     public void configure() throws Exception {
         from("timer:myTimer?period=1000&repeatCount=8")
                 .routePolicy(new MyRoutePolicy())   // header に格納される counter をインクリメントするためのポリシー
-                .setBody(simple("message" + "${header.counter}"))
+                .setBody(simple("message" + "${exchangeProperty.counter}"))
                 .process(exchange -> {
                     LOG.info("--------------------------------------------------");
                     var maps = exchange.getProperties();
