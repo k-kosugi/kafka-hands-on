@@ -27,7 +27,7 @@ public class MyConfiguration {
         kafkaConfiguration.setAutoCommitEnable(true);
 
         // バッチサイズ
-        kafkaConfiguration.setProducerBatchSize(7);
+        kafkaConfiguration.setProducerBatchSize(0);
 
         // ClientId
         kafkaConfiguration.setClientId(Producer.class.getSimpleName());
