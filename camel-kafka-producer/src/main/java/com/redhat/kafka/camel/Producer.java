@@ -12,6 +12,7 @@ public class Producer extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("timer:myTimer?period=1000&repeatCount=8")
+                .routeId("kafka-producer")
                 .routePolicy(new MyRoutePolicy())   // header に格納される counter をインクリメントするためのポリシー
                 .setBody(simple("message" + "${exchangeProperty.counter}"))
                 .log("${body}")
