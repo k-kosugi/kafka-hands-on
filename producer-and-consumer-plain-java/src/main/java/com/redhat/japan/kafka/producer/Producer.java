@@ -85,7 +85,7 @@ public class Producer {
          * バッチ処理で送受信する機能を備えています。
          *
          */
-        properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "16");
+        properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "512");
         properties.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "1");
 
         return properties;
